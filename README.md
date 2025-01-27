@@ -9,7 +9,7 @@ Etape 2 Telechargement de django
 - pip install Django
 
 Etape 3 - se placer dans le projet
-- cd datacase
+- cd recommend
 
 Etape 4 - Lancement du serveur en local
 - python manage.py runserver
