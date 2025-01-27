@@ -1,0 +1,127 @@
+/*police*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Spectral+SC:wght@400;600&display=swap');
+
+/*body*/
+body {
+    background-color: #121212;
+    color: #ccc;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/*conteneur principal*/
+h1 {
+    font-family: 'Spectral SC', serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    animation: flicker 1.5s infinite alternate;
+}
+
+/*clignotement titre*/
+@keyframes flicker {
+    0% {
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+    }
+    50% {
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+    }
+}
+
+/*form*/
+form {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 300px;
+    border: 2px solid #333;
+}
+
+/*label*/
+label {
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+/*input*/
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border: 1px solid #FFD700;
+    outline: none;
+    background-color: #444;
+}
+
+/*bouton*/
+button {
+    background-color: #FFD700;
+    color: #121212;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.05);
+}
+
+/*hover*/
+button:active {
+    background-color: #ff4500;
+    transform: scale(1.02);
+}
+#movie-list {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    width: 300px;
+    z-index: 1000;
+}
+.movie-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+.movie-item img {
+    width: 40px;
+    height: 60px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+.movie-item:hover {
+    background-color: #f0f0f0;
+}

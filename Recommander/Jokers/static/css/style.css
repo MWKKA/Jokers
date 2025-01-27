@@ -1,0 +1,139 @@
+/*police de caractères*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;600&display=swap');
+
+/*général*/
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/*titre principal*/
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    animation: fadeIn 2s ease-out;
+}
+
+/*liste des films*/
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Réduit la largeur minimale des éléments */
+    gap: 20px;
+}
+
+
+/*élément de film*/
+li {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+    transform: scale(1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/*image du film*/ 
+img.fit-picture {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: opacity 0.3s ease;
+}
+
+
+li:hover img {
+    opacity: 0.8;
+}
+
+/*titre du film*/
+strong {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: fadeIn 2s ease-out;
+}
+
+/*détails sur le film*/
+p {
+    font-size: 1rem;
+    color: #aaa;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInDescription 1.5s forwards;
+    animation-delay: 0.5s;
+}
+
+/*lien "retour à la recherche"*/
+a {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #FFD700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #333;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+    background-color: #FFD700;
+    color: #333;
+    transform: scale(1.05);
+}
+
+
+/*fade-in titre*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*fade-in description*/
+@keyframes fadeInDescription {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

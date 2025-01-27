@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechercher un film</title>
+    <link rel="stylesheet" href="/static/css/style_search.css">
+    <style>
+        #movie-list {
+            border: 1px solid #444;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            background-color: #1a1a1a;
+            width: 19.5%;
+            z-index: 1000;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+        }
+        .movie-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: #ccc;
+        }
+        .movie-item img {
+            width: 40px;
+            height: 60px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .movie-item:hover {
+            background-color:rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <h1>Recherchez un film</h1>
+    <form action="{% url 'recommend_movies' %}" method="get">
+        <label for="movie_name">Nom du film :</label>
+        <input type="text" id="movie_name" name="movie_name" autocomplete="off" required>
+        <div id="movie-list"></div>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const movieInput = document.getElementById('movie_name');
+            const movieList = document.getElementById('movie-list');
+
+            movieInput.addEventListener('input', function () {
+                const query = this.value.trim();
+
+                if (query.length > 2) {
+                    fetch(`/search-movies/?q=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            movieList.innerHTML = ''; //Clear
+                            if (data.length > 0) {
+                                data.forEach(movie => {
+                                    const movieItem = document.createElement('div');
+                                    movieItem.classList.add('movie-item');
+
+                                    //image du film
+                                    const movieImage = document.createElement('img');
+                                    movieImage.src = movie.poster_url || '/static/default_poster.jpg';
+                                    movieImage.alt = `${movie.primaryTitle} Poster`;
+
+                                    //titre
+                                    const movieText = document.createElement('span');
+                                    movieText.textContent = `${movie.primaryTitle} (${movie.startYear})`;
+
+                                    movieItem.appendChild(movieImage);
+                                    movieItem.appendChild(movieText);
+
+                                    movieItem.addEventListener('click', () => {
+                                        movieInput.value = movie.primaryTitle;
+                                        movieList.innerHTML = ''; //clear
+                                    });
+
+                                    movieList.appendChild(movieItem);
+                                });
+                            } else {
+                                movieList.innerHTML = '<div class="movie-item">Aucun résultat trouvé</div>';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de la recherche des films :', error);
+                        });
+                } else {
+                    movieList.innerHTML = ''; //clear si trop court
+                }
+            });
+
+            //fermeture liste déroulante
+            document.addEventListener('click', (event) => {
+                if (!movieList.contains(event.target) && event.target !== movieInput) {
+                    movieList.innerHTML = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

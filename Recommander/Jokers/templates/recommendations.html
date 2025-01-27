@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Films recommandés</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% load static %}
+</head>
+<body>
+    <h1>Films recommandés pour "{{ movie_title }}"</h1> 
+    
+    {% if recommended_movies %}
+        <ul>
+            {% for movie in recommended_movies %}
+                <li>
+                    <strong>{{ movie.primaryTitle }}</strong> ({{ movie.startYear }})<br>
+                    Note moyenne : {{ movie.averageRating }}
+                    <img
+                    class="fit-picture"
+                    src="{{ movie.poster_url }}"
+                    />
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune recommandation trouvée.</p>
+    {% endif %}
+
+    <a href="{% url 'search_movie' %}">Retour à la recherche</a>
+</body>
+</html>
+
